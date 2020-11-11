@@ -1,0 +1,51 @@
+﻿@model IEnumerable<StephenKingFanSite.Models.Score>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="text-center">
+    <h1 class="display-4">Stephen King</h1>
+    <h2>King of Horror</h2>
+</div>
+<br />
+<h1>Scores</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HighScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ranking)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HighScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ranking)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
