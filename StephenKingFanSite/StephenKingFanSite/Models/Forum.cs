@@ -8,9 +8,11 @@ namespace StephenKingFanSite.Models
 {
     public class Forum
     {
+        //see Brian about validation not working correctly?
         public int ID { get; set; }
+
         /*[Required(ErrorMessage = "Please enter a Post Topic.")]
-        [Range(2, 50 ErrorMessage = "Topic should be between 2 and 50 characters long.")]*/
+        [Range(2, 50, ErrorMessage = "Topic should be between 2 and 50 characters long.")]*/
         public string Topic { get; set; }
 
         /*[Required(ErrorMessage = "Please enter your comments.")]
@@ -20,7 +22,10 @@ namespace StephenKingFanSite.Models
         /*[Required(ErrorMessage = "Please enter your user name.")]
         [Range(2, 25, ErrorMessage = "User name must between 2 and 25 characters long.")]*/
         public string Name { get; set; }
+      
 
         public DateTime Date { get; set; }
+
+        public ICollection<User> Users { get; set; }
     }
 }
