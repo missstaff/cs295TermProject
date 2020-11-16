@@ -32,9 +32,18 @@ namespace StephenKingFanSite.Controllers
             {
                 return NotFound();
             }
+             
+            /*var genre = await _context.Genres
+                .FirstOrDefaultAsync(m => m.ID == id);*/
+
+            //if can get right will display books/novels lists that are in that genre//
+            //IF NOT USED COMMENTTED OUT CODE AND DELETE MODELS FROM DETAILS PAGE//
 
             var genre = await _context.Genres
-                .FirstOrDefaultAsync(m => m.ID == id);
+        .Include(n => n.Novels)
+        .Include(m => m.Movies)
+        .AsNoTracking()
+        .FirstOrDefaultAsync(m => m.ID == id);
             if (genre == null)
             {
                 return NotFound();

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+
 
 
 namespace StephenKingFanSite.Models
@@ -10,5 +8,12 @@ namespace StephenKingFanSite.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
+
+
+        //Navigation Properties//
+        public ICollection<Forum> Forums { get; set; }
+        public ICollection<Movie> Movies { get; set; }
+        public ICollection<Novel> Novels { get; set; }
+        public ICollection<Score> Scores { get; set; }
     }
 }

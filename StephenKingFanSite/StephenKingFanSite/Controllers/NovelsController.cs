@@ -20,9 +20,72 @@ namespace StephenKingFanSite.Controllers
         }
 
         // GET: Novels
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber)
         {
-            return View(await _context.Novels.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["PublisherSortParm"] = sortOrder == "Publisher" ? "publisher_desc" : "Publisher";
+            ViewData["GenreSortParm"] = sortOrder == "Genre" ? "genre_desc" : "Genre";
+            ViewData["RatingSortParm"] = sortOrder == "Rating" ? "rating_desc" : "Rating";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+            var novels = from n in _context.Novels
+                         select n;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                novels = novels.Where(s => s.Title.Contains(searchString)
+                                       || s.Publisher.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    novels = novels.OrderByDescending(m => m.Title);
+                    break;
+                case "Director":
+                    novels = novels.OrderBy(m => m.Publisher);
+                    break;
+                case "director_desc":
+                    novels = novels.OrderByDescending(m => m.Publisher);
+                    break;
+                case "Date":
+                    novels = novels.OrderBy(m => m.PulicationDate);
+                    break;
+                case "date_desc":
+                    novels = novels.OrderByDescending(m => m.PulicationDate);
+                    break;
+                case "Genre":
+                    novels = novels.OrderBy(m => m.Genre);
+                    break;
+                case "genre_desc":
+                    novels = novels.OrderByDescending(m => m.Genre);
+                    break;
+                case "Rating":
+                    novels = novels.OrderBy(m => m.Rating);
+                    break;
+                case "rating_desc":
+                    novels = novels.OrderByDescending(m => m.Rating);
+                    break;
+                default:
+                    novels = novels.OrderBy(s => s.Title);
+                    break;
+            }
+            int pageSize = 3;
+            return View(await PaginatedList<Novel>.CreateAsync(novels.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Novels/Details/5

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StephenKingFanSite.Data;
 
 namespace StephenKingFanSite.Migrations
 {
     [DbContext(typeof(KingContext))]
-    partial class KingContextModelSnapshot : ModelSnapshot
+    [Migration("20201115213950_Navigation-Properties")]
+    partial class NavigationProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -12,6 +12,7 @@ namespace StephenKingFanSite.Models
         public string Ranking { get; set; }
         public DateTime Date { get; set; }
 
+        //Navigation Properties//
         public ICollection<User> Users { get; set; }
     }
 }
