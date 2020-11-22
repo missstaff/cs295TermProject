@@ -8,26 +8,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace StephenKingFanSite.Models
 {
     public class Forum
-    {//Validation not working correctly talk to Brian//
+    {
         public int ID { get; set; }
 
+        [StringLength(60, MinimumLength = 2, ErrorMessage = "Post topic must be between 2 and 60 characters")]
         [Required]
-        /*[Range(2, 50, ErrorMessage = "Topic should be between 2 and 50 characters long.")]*/
         public string Topic { get; set; }
 
         [Required]
-        /*[Range(5, 1000, ErrorMessage = "Post must between 5 and 1000 characters long.")]*/
+        [StringLength(1000, MinimumLength = 2, ErrorMessage = "Post must between 5 and 1000 characters long.")]
         public string Comments { get; set; }
 
         [Required]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "User name should be between 2 and 50 characters long.")]
         public string Name { get; set; }
-        //do i need to do this to get names in user table//
-         /*private string name;
-        public string Name 
-        {
-            get { return name; }   // get method
-            set { name = value; }  // set method 
-        }*/
        
         [Required]
         public DateTime Date { get; set; }

@@ -56,10 +56,10 @@ namespace StephenKingFanSite.Controllers
                 case "name_desc":
                     novels = novels.OrderByDescending(m => m.Title);
                     break;
-                case "Director":
+                case "Publisher":
                     novels = novels.OrderBy(m => m.Publisher);
                     break;
-                case "director_desc":
+                case "publisher_desc":
                     novels = novels.OrderByDescending(m => m.Publisher);
                     break;
                 case "Date":
@@ -117,7 +117,7 @@ namespace StephenKingFanSite.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title,Publisher,PulicationDate,Genre")] Novel novel)
+        public async Task<IActionResult> Create([Bind("ID,Title,Publisher,PulicationDate,Genre,Rating")] Novel novel)
         {
             if (ModelState.IsValid)
             {
@@ -149,7 +149,7 @@ namespace StephenKingFanSite.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Publisher,PulicationDate,Genre")] Novel novel)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Publisher,PulicationDate,Genre,Rating")] Novel novel)
         {
             if (id != novel.ID)
             {
