@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using StephenKingFanSite.Data;
 using StephenKingFanSite.Models;
+using StephenKingFanSite.Repos;
 
 namespace StephenKingFanSite.Controllers
 {
     public class MoviesController : Controller
     {
-        private readonly KingContext _context;
+        IMovieRepo repo;
 
-        public MoviesController(KingContext context)
+        public MoviesController(IMovieRepo r)
         {
-            _context = context;
+            repo = r;
         }
 
         // GET: Movies
@@ -43,7 +41,7 @@ namespace StephenKingFanSite.Controllers
             }
 
             ViewData["CurrentFilter"] = searchString;
-            var movies = from m in _context.Movies
+            var movies = from m in await repo.GetAllMoviesAsync()
                            select m;
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -96,9 +94,7 @@ namespace StephenKingFanSite.Controllers
             {
                 return NotFound();
             }
-
-            var movie = await _context.Movies
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var movie = await repo.GetMoviesAsync(id);
             if (movie == null)
             {
                 return NotFound();
@@ -122,8 +118,8 @@ namespace StephenKingFanSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(movie);
-                await _context.SaveChangesAsync();
+                await repo.AddMoviesAsync(movie);
+                await repo.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(movie);
@@ -136,8 +132,8 @@ namespace StephenKingFanSite.Controllers
             {
                 return NotFound();
             }
-
-            var movie = await _context.Movies.FindAsync(id);
+            //Include(m => m.ID == id).??
+            var movie = await repo.GetMoviesAsync(id);
             if (movie == null)
             {
                 return NotFound();
@@ -161,8 +157,8 @@ namespace StephenKingFanSite.Controllers
             {
                 try
                 {
-                    _context.Update(movie);
-                    await _context.SaveChangesAsync();
+                    await repo.UpdateMoviesAsync(movie);
+                    await repo.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -188,8 +184,7 @@ namespace StephenKingFanSite.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var movie = await repo.GetMoviesAsync(id);
             if (movie == null)
             {
                 return NotFound();
@@ -203,15 +198,14 @@ namespace StephenKingFanSite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var movie = await _context.Movies.FindAsync(id);
-            _context.Movies.Remove(movie);
-            await _context.SaveChangesAsync();
+            var movie = await repo.DeleteMoviesAsync(id);
+            
             return RedirectToAction(nameof(Index));
         }
 
         private bool MovieExists(int id)
         {
-            return _context.Movies.Any(e => e.ID == id);
+            return repo.MoviesExists(id);
         }
     }
 }

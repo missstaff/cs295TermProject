@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace StephenKingFanSite.Models
 {
     public class Novel
-    {//Validation kinda working???//
+    {
         public int ID { get; set; }
 
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Title must be between 2 and 50 characters")]

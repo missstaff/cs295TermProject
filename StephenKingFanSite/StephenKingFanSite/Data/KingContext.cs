@@ -5,6 +5,10 @@ namespace StephenKingFanSite.Data
 {
     public class KingContext : DbContext
     {
+        public KingContext()
+        {
+        }
+
         public KingContext(DbContextOptions<KingContext> options) : base(options)
         {
         }
