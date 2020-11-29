@@ -1,4 +1,5 @@
-﻿using StephenKingFanSite.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using StephenKingFanSite.Data;
 using StephenKingFanSite.Models;
 using System;
 using System.Linq;
@@ -37,7 +38,6 @@ namespace StephenKingFanSite.Repos
             return await Task.FromResult<Movie>(context.Movies.Find(id));
         }
 
-
         public bool MoviesExists(int id)
         {
             var movie = GetMoviesAsync(id);
@@ -53,17 +53,17 @@ namespace StephenKingFanSite.Repos
 
         public Task SaveChangesAsync()
         {
-            return SaveChangesAsync();
+            return context.SaveChangesAsync();
         }
 
         public void UpdateMoviesAsync(Movie movie, int id)
         {
             var m = context.Movies.Find(id);
-            m.Title = movie.Title;
-            m.Director = movie.Director;
-            m.PremiereDate = m.PremiereDate;
-            m.Genre = m.Genre;
-            m.Rating = movie.Rating;
+            movie.Title = m.Title;
+            movie.Director = m.Director;
+            movie.PremiereDate = m.PremiereDate;
+            movie.Genre = m.Genre;
+            movie.Rating = m.Rating;
            // context.Movies.Update(movie);// not sure I need that
             context.SaveChangesAsync();
         }

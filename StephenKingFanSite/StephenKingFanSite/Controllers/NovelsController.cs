@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StephenKingFanSite.Data;
 using StephenKingFanSite.Models;
+using StephenKingFanSite.Repos;
 
 namespace StephenKingFanSite.Controllers
 {
     public class NovelsController : Controller
     {
-        private readonly KingContext _context;
+        INovelRepo repo;
 
-        public NovelsController(KingContext context)
+        public NovelsController(INovelRepo r)
         {
-            _context = context;
+            repo = r;
         }
 
         // GET: Novels
@@ -43,8 +44,8 @@ namespace StephenKingFanSite.Controllers
             }
 
             ViewData["CurrentFilter"] = searchString;
-            var novels = from n in _context.Novels
-                         select n;
+            var novels = from n in await repo.GetAllNovelsAsync()
+                                select n;
             if (!String.IsNullOrEmpty(searchString))
             {
                 novels = novels.Where(s => s.Title.Contains(searchString)
@@ -96,8 +97,7 @@ namespace StephenKingFanSite.Controllers
                 return NotFound();
             }
 
-            var novel = await _context.Novels
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var novel = await repo.GetNovelAsync(id);
             if (novel == null)
             {
                 return NotFound();
@@ -121,8 +121,8 @@ namespace StephenKingFanSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(novel);
-                await _context.SaveChangesAsync();
+                await repo.AddNovelAsync(novel);
+                await repo.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(novel);
@@ -136,7 +136,7 @@ namespace StephenKingFanSite.Controllers
                 return NotFound();
             }
 
-            var novel = await _context.Novels.FindAsync(id);
+            var novel = await repo.GetNovelAsync(id);
             if (novel == null)
             {
                 return NotFound();
@@ -160,8 +160,8 @@ namespace StephenKingFanSite.Controllers
             {
                 try
                 {
-                    _context.Update(novel);
-                    await _context.SaveChangesAsync();
+                    repo.UpdateNovelAsync(novel, id);
+                    await repo.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -187,8 +187,7 @@ namespace StephenKingFanSite.Controllers
                 return NotFound();
             }
 
-            var novel = await _context.Novels
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var novel = await repo.GetNovelAsync(id);
             if (novel == null)
             {
                 return NotFound();
@@ -202,15 +201,13 @@ namespace StephenKingFanSite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var novel = await _context.Novels.FindAsync(id);
-            _context.Novels.Remove(novel);
-            await _context.SaveChangesAsync();
+            var novel = await repo.DeleteNovelAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool NovelExists(int id)
         {
-            return _context.Novels.Any(e => e.ID == id);
+            return repo.NovelExists(id);
         }
     }
 }

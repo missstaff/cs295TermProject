@@ -85,7 +85,7 @@ namespace StephenKingFanSite.Controllers
             int pageSize = 3;
             return View(await PaginatedList<Movie>.CreateAsync(movies.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
-    
+
 
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -157,7 +157,7 @@ namespace StephenKingFanSite.Controllers
             {
                 try
                 {
-                    await repo.UpdateMoviesAsync(movie);
+                    repo.UpdateMoviesAsync(movie, id);
                     await repo.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

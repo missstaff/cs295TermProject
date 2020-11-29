@@ -48,6 +48,7 @@ namespace StephenKingFanSite.Repos
         {
             return Task.FromResult(movies.ElementAt((int)id));
         }
+
         //if breaks add async into name of method and add await infront of get moviesget
         public bool MoviesExists(int id)
         {
@@ -70,12 +71,12 @@ namespace StephenKingFanSite.Repos
         public void UpdateMoviesAsync(Movie movie, int id)
         {
             var m = movies.Find(m => m.ID == id);
-            m.Title = movie.Title;
-            m.Director = movie.Director;
-            m.PremiereDate = m.PremiereDate;
-            m.Genre = m.Genre;
-            m.Rating = movie.Rating;
-            
+            movie.Title = m.Title;
+            movie.Director = m.Director;
+            movie.PremiereDate = m.PremiereDate;
+            movie.Genre = m.Genre;
+            movie.Rating = m.Rating;
+            SaveChangesAsync();
         }
     }
 }
