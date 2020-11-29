@@ -71,12 +71,11 @@ namespace StephenKingFanSite.Repos
         public void UpdateMoviesAsync(Movie movie, int id)
         {
             var m = movies.Find(m => m.ID == id);
-            movie.Title = m.Title;
-            movie.Director = m.Director;
-            movie.PremiereDate = m.PremiereDate;
-            movie.Genre = m.Genre;
-            movie.Rating = m.Rating;
-            SaveChangesAsync();
+            m.Title = movie.Title;
+            m.Director = movie.Director;
+            m.PremiereDate = movie.PremiereDate;
+            m.Genre = movie.Genre;
+            m.Rating = movie.Rating;
         }
     }
 }

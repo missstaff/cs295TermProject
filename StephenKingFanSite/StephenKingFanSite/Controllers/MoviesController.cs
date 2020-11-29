@@ -132,7 +132,6 @@ namespace StephenKingFanSite.Controllers
             {
                 return NotFound();
             }
-            //Include(m => m.ID == id).??
             var movie = await repo.GetMoviesAsync(id);
             if (movie == null)
             {

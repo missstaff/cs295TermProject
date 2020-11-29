@@ -59,13 +59,11 @@ namespace StephenKingFanSite.Repos
         public void UpdateMoviesAsync(Movie movie, int id)
         {
             var m = context.Movies.Find(id);
-            movie.Title = m.Title;
-            movie.Director = m.Director;
-            movie.PremiereDate = m.PremiereDate;
-            movie.Genre = m.Genre;
-            movie.Rating = m.Rating;
-           // context.Movies.Update(movie);// not sure I need that
-            context.SaveChangesAsync();
+            m.Title = movie.Title;
+            m.Director = movie.Director;
+            m.PremiereDate = movie.PremiereDate;
+            m.Genre = movie.Genre;
+            m.Rating = movie.Rating;
         }
     }
 }

@@ -71,13 +71,12 @@ namespace StephenKingFanSite.Repos
 
         public void UpdateNovelAsync(Novel novel, int id)
         {
-            var n = novels.Find(m => m.ID == id);
-            novel.Title = n.Title;
-            novel.Publisher = n.Publisher;
-            novel.PulicationDate = n.PulicationDate;
-            novel.Genre = n.Genre;
-            novel.Rating = n.Rating;
-            SaveChangesAsync();
+            var n = novels.Find(n => n.ID == id);
+            n.Title = novel.Title;
+            n.Publisher = novel.Publisher;
+            n.PulicationDate = novel.PulicationDate;
+            n.Genre = novel.Genre;
+            n.Rating = novel.Rating;
         }
     }
 }
