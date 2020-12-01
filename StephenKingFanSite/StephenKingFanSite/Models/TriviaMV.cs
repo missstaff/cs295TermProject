@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace StephenKingFanSite.Models
 {
+    [Keyless]
     public class TriviaMV
     {
         //maybe remove "userAnswer" and can iterate?//
@@ -25,7 +27,7 @@ namespace StephenKingFanSite.Models
         public String RightOrWrong9 { get; set; }
         public String UserAnswer10 { get; set; }
         public String RightOrWrong10 { get; set; }
-        public String UserAnswer11 { get; set; }
+        /*public String UserAnswer11 { get; set; }
         public String RightOrWrong11 { get; set; }
         public String UserAnswer12 { get; set; }
         public String RightOrWrong12 { get; set; }
@@ -104,7 +106,7 @@ namespace StephenKingFanSite.Models
         public String UserAnswer49 { get; set; }
         public String RightOrWrong49 { get; set; }
         public String UserAnswer50 { get; set; }
-        public String RightOrWrong50 { get; set; }
+        public String RightOrWrong50 { get; set; }*/
 
         public void CheckAnswers()
         {
@@ -118,7 +120,7 @@ namespace StephenKingFanSite.Models
             RightOrWrong8 = UserAnswer8 == "Cheesecake" ? "Correct" : "Wrong Mr. King's favorite food is cheesecake";
             RightOrWrong9 = UserAnswer9 == "True" ? "Correct" : "Wrong King does in fact own 3 radio stations";
             RightOrWrong10 = UserAnswer10 == "Tabitha" ? "Correct" : "Wrong his wife's name is Tabitha";
-            RightOrWrong11 = UserAnswer11 == "3" ? "Correct" : "Wrong";
+            /*RightOrWrong11 = UserAnswer11 == "3" ? "Correct" : "Wrong";
             RightOrWrong12 = UserAnswer12 == "300000000" ? "Correct" : "Wrong";
             RightOrWrong13 = UserAnswer13 == "1971" ? "Correct" : "Wrong";
             RightOrWrong14 = UserAnswer14 == "False" ? "Correct" : "Wrong";
@@ -157,7 +159,7 @@ namespace StephenKingFanSite.Models
             RightOrWrong47 = UserAnswer47 == "Maine" ? "Correct" : "Wrong";
             RightOrWrong48 = UserAnswer48 == "True" ? "Correct" : "Wrong";
             RightOrWrong49 = UserAnswer49 == "3" ? "Correct" : "Wrong";
-            RightOrWrong50 = UserAnswer50 == "False" ? "Correct" : "Wrong";
+            RightOrWrong50 = UserAnswer50 == "False" ? "Correct" : "Wrong";*/
         }
     }
 }

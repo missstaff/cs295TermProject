@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StephenKingFanSite", "StephenKingFanSite\StephenKingFanSite.csproj", "{44F66E4C-7770-4A69-A90B-F746E96698E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KIngUnitTests", "KIngUnitTests\KIngUnitTests.csproj", "{B2F3E587-511F-4018-9977-98741EA23716}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KIngUnitTests", "KIngUnitTests\KIngUnitTests.csproj", "{B2F3E587-511F-4018-9977-98741EA23716}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

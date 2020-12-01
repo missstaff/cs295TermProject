@@ -18,6 +18,7 @@ namespace StephenKingFanSite.Data
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Novel> Novels { get; set; }
         public DbSet<Score> Scores { get; set; }
+        public DbSet<TriviaMV> Trivias { get; set; }
         public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,6 +28,7 @@ namespace StephenKingFanSite.Data
             modelBuilder.Entity<Movie>().ToTable("Movie");
             modelBuilder.Entity<Novel>().ToTable("Novel");
             modelBuilder.Entity<Score>().ToTable("Score");
+            modelBuilder.Entity<TriviaMV>().ToTable("Trivia");
             modelBuilder.Entity<User>().ToTable("User");
         }
 

@@ -3,56 +3,56 @@
 @{
     ViewData["Title"] = "Index";
 }
+
 <div class="text-center">
     <h1 class="display-4">Stephen King</h1>
     <h2>King of Horror</h2>
 </div>
 <br />
 <h1>Discussion Forum</h1>
-
+<br />
 <p>
     <a asp-action="Create">Create A Post</a>
 </p>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Topic)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Comments)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Topic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comments)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                <!--at symbol item.ID lines 51 and 53-->
-                <!--<a asp-action="Edit" asp-route-id="">Edit</a> |-->
-                <a asp-action="Details" asp-route-id="@item.ID">Post Details</a>
-                <!--<a asp-action="Delete" asp-route-id="">Delete</a>-->
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="ml-3 pb-2">
+
+    @foreach (var item in Model)
+    {
+    <article>
+        <h6>
+            @Html.DisplayNameFor(model => model.Topic)
+        </h6>
+        <p>
+            @Html.DisplayFor(modelItem => item.Topic)
+        </p>
+
+        <h6>
+            @Html.DisplayNameFor(model => model.Comments)
+        </h6>
+        <p>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </p>
+
+        <h6>
+            @Html.DisplayNameFor(model => model.Name)
+        </h6>
+        <p>
+            @Html.DisplayFor(modelItem => item.Name)
+        </p>
+
+        <h6>
+            @Html.DisplayNameFor(model => model.Date)
+        </h6>
+        <p>
+            @Html.DisplayFor(modelItem => item.Date)
+        </p>
+    </article>
+        <br />
+        <div>
+            <!--at symbol item.ID lines 51 and 53 asp-route-id=-->
+            <!--<a asp-action="Edit" asp-route-id="">Edit</a> |-->
+            <!--<a asp-action="Details" asp-route-id="">Post Details</a>-->
+            <!--<a asp-action="Delete" asp-route-id="">Delete</a>-->
+        </div>
+    }
+</div>

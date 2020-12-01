@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using StephenKingFanSite.Controllers;
 using StephenKingFanSite.Models;
 using StephenKingFanSite.Repos;
@@ -44,6 +45,7 @@ namespace KIngUnitTests
             });
 
             var movies = repo.Movies.ToList();
+
             Assert.Equal(3, movies.Count);
             Assert.Equal("test", movies[0].Title);
             Assert.Equal("test2", movies[1].Title);
@@ -202,5 +204,6 @@ namespace KIngUnitTests
             Assert.Equal("Updated", movie.Director);
             Assert.Equal(5, movie.Rating);
         }
+
     }
 }
