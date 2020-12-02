@@ -12,7 +12,7 @@ namespace StephenKingFanSite.Repos
         public Task<Novel> GetNovelAsync(int? id);
         public Task<int> AddNovelAsync(Novel novel);
         public void UpdateNovelAsync(Novel novel, int id);
-        public Task<int> DeleteNovelAsync(int? id);
+        public Task<Novel> DeleteNovelAsync(int? id);
         public bool NovelExists(int id);
         public Task SaveChangesAsync();
 

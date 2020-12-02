@@ -201,7 +201,8 @@ namespace StephenKingFanSite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var novel = await repo.DeleteNovelAsync(id);
+            var novel = repo.GetNovelAsync(id);
+            await repo.DeleteNovelAsync(id);
             return RedirectToAction(nameof(Index));
         }
 

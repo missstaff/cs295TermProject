@@ -21,11 +21,16 @@ namespace StephenKingFanSite.Repos
             return await context.SaveChangesAsync();
         }
 
-        public async Task<int> DeleteNovelAsync(int? id)
+        public async Task<Novel> DeleteNovelAsync(int? id)
         {
-            var novel = context.Novels.Find(id);
-            context.Novels.Remove(novel);
-            return await context.SaveChangesAsync();
+            Novel novel = context.Novels.FirstOrDefault(n => n.ID == id);
+            if (novel != null)
+            {
+                context.Novels.Remove(novel);
+                await context.SaveChangesAsync();
+            }
+
+            return await Task.FromResult(novel);
         }
 
         public async Task<IQueryable<Novel>> GetAllNovelsAsync()

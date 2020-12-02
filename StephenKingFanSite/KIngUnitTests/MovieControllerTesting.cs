@@ -45,9 +45,7 @@ namespace KIngUnitTests
                 Genre = "T",
                 Rating = 4
             });
-
             
-            //var movies = repo.Movies.ToList();
             await controller.Delete(1);
             await controller.DeleteConfirmed(1);
             Assert.Equal(2, repo.Movies[0].ID);
@@ -85,6 +83,7 @@ namespace KIngUnitTests
                 Genre = "T",
                 Rating = 4
             });
+
             var id = 3;
             var movies = repo.Movies.ToList();
             await controller.Edit(id);

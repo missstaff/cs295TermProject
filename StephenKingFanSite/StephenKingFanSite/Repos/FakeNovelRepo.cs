@@ -27,17 +27,11 @@ namespace StephenKingFanSite.Repos
             return Task.FromResult<int>(success);
         }
 
-        public Task<int> DeleteNovelAsync(int? id)
+        public Task<Novel> DeleteNovelAsync(int? id)
         {
-            int success = 0;
-            if (id != null)
-            {
-                var novel = novels.ElementAt((int)id);
-                novels.Remove(novel);
-                success = 1;
-            }
-
-            return Task.FromResult<int>(success);
+            var novel = novels.Find(n => n.ID == id);
+            novels.Remove(novel);
+            return Task.FromResult<Novel>(novel);
         }
 
         public Task<IQueryable<Novel>> GetAllNovelsAsync()
