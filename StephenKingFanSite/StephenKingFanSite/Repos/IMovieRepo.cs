@@ -12,7 +12,7 @@ namespace StephenKingFanSite.Repos
         public Task<Movie> GetMoviesAsync(int? id);
         public Task<int> AddMoviesAsync(Movie movie);
         public void UpdateMoviesAsync(Movie movie, int id);
-        public Task<int> DeleteMoviesAsync(int? id);
+        public Task<Movie> DeleteMoviesAsync(int? id);
         public bool MoviesExists(int id);
         public Task SaveChangesAsync();
     }

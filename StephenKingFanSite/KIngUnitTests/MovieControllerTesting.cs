@@ -46,11 +46,11 @@ namespace KIngUnitTests
                 Rating = 4
             });
 
-            bool deleted = true;
-            var movies = repo.Movies.ToList();
+            
+            //var movies = repo.Movies.ToList();
             await controller.Delete(1);
-            await Task.FromResult(controller.DeleteConfirmed(1));
-            Assert.True(deleted);
+            await controller.DeleteConfirmed(1);
+            Assert.Equal(2, repo.Movies[0].ID);
         }
 
         [Fact]
@@ -85,12 +85,12 @@ namespace KIngUnitTests
                 Genre = "T",
                 Rating = 4
             });
-
+            var id = 3;
             var movies = repo.Movies.ToList();
-            var movie = movies.ElementAt(2);
+            await controller.Edit(id);
+            var movie = movies.Find(m => m.ID == id);
             movie.Title = "Updated";
-            await Task.FromResult(controller.Edit(3));
-            Assert.Equal("Updated", movie.Title);
+            Assert.Equal("Updated", repo.Movies[2].Title);
         }
     }
 }

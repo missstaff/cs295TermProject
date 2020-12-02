@@ -197,8 +197,13 @@ namespace StephenKingFanSite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var movie = await repo.DeleteMoviesAsync(id);
-            
+            var movie = repo.GetMoviesAsync(id);
+            await repo.DeleteMoviesAsync(id);
+            //await repo.SaveChangesAsync();
+            /*if (movie != null)
+            {
+                throw new Exception();
+            }*/
             return RedirectToAction(nameof(Index));
         }
 

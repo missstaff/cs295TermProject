@@ -21,11 +21,16 @@ namespace StephenKingFanSite.Repos
             return await context.SaveChangesAsync();
         }
 
-        public async Task<int> DeleteMoviesAsync(int? id)
+        public async Task<Movie> DeleteMoviesAsync(int? id)
         {
-            var movie = context.Movies.Find(id);
-            context.Movies.Remove(movie);
-            return await context.SaveChangesAsync();
+            Movie movie = context.Movies.FirstOrDefault(m => m.ID == id);
+            if (movie != null)
+            {
+                context.Movies.Remove(movie);
+                await context.SaveChangesAsync();
+            }
+
+            return await Task.FromResult(movie);
         }
 
         public async Task<IQueryable<Movie>> GetAllMoviesAsync()

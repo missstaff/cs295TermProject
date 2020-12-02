@@ -1,4 +1,5 @@
 ﻿using StephenKingFanSite.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,17 +27,12 @@ namespace StephenKingFanSite.Repos
             return Task.FromResult<int>(success);
         }
 
-        public Task<int> DeleteMoviesAsync(int? id)
+        public Task<Movie> DeleteMoviesAsync(int? id)
         {
-            int success = 0;
-            if (id != null)
-            {
-                var movie = movies.ElementAt((int)id);
-                movies.Remove(movie);
-                success = 1; 
-            }
+            var movie = movies.Find(m => m.ID == id);
+            movies.Remove(movie);
+            return Task.FromResult<Movie>(movie);
 
-            return Task.FromResult<int>(success);
         }
 
         public Task<IQueryable<Movie>> GetAllMoviesAsync()
@@ -46,7 +42,8 @@ namespace StephenKingFanSite.Repos
 
         public Task<Movie> GetMoviesAsync(int? id)
         {
-            return Task.FromResult(movies.ElementAt((int)id));
+            var movie = movies.Find(m => m.ID == id);
+            return Task.FromResult(movie); //edited this
         }
 
         //if breaks add async into name of method and add await infront of get moviesget
